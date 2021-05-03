@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/cutlass_test.dir/gpu_timer.cu.o CMakeFiles/cutlass_test.dir/main.cu.o -o cutlass_test  -lcudadevrt -lcudart_static -lrt -lpthread -ldl  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib"

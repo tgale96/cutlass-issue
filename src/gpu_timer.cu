@@ -1,4 +1,4 @@
-#include "sputnik/block/dsd/gpu_timer.h"
+#include "gpu_timer.h"
 #include <stdexcept>
 
 GpuTimer::GpuTimer() {

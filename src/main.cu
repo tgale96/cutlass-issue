@@ -1,4 +1,5 @@
 #include <cassert>
+#include <unistd.h>
 #include <iostream>
 
 #include "cutlass/gemm/kernel/default_gemm_universal.h"
@@ -39,9 +40,9 @@ int main() {
   size_t bytes = M * K * sizeof(::cutlass::half_t);
   cudaError_t custatus = cudaMalloc(&A, bytes);
   assert(custatus == cudaSuccess);
-  cudaError_t custatus = cudaMalloc(&B, bytes);
+  custatus = cudaMalloc(&B, bytes);
   assert(custatus == cudaSuccess);  
-  cudaError_t custatus = cudaMalloc(&C, bytes);
+  custatus = cudaMalloc(&C, bytes);
   assert(custatus == cudaSuccess);  
   
   using Gemm = ::cutlass::gemm::device::GemmUniversalAdapter<
@@ -60,7 +61,7 @@ int main() {
   args.transposed_problem();
 
   Gemm gemm_operator;
-  ::cutlass::Status status = gemm_operator.initialize(args, nullptr, stream);
+  ::cutlass::Status status = gemm_operator.initialize(args);
   assert(status == ::cutlass::Status::kSuccess);
   
   int sleep_duration = 50;
@@ -85,7 +86,7 @@ int main() {
   }
   timer.stop_and_wait();
   double ms = timer.duration(iterations);
-  int64_t flops = (int64_t)kDimM * kDimK * kDimN * 2;
+  int64_t flops = (int64_t)M * K * N * 2;
 
   std::cout << "ms = " << ms << std::endl;  
   std::cout << "flops = " << flops << std::endl;
