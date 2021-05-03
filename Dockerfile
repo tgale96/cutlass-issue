@@ -20,4 +20,4 @@ RUN apt-get install -y software-properties-common && \
     apt-get update && apt-get install -y cmake
 
 # Set the working directory.
-WORKDIR /mount/sputnik
+WORKDIR /mount/cutlass-issue
